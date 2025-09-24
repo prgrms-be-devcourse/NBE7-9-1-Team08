@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,17 @@ public class ProductService {
         Product product = new Product(name, price, quantity);
 
         return productRepository.save(product);
+    }
+
+    public Optional<Product> findById(int id) {
+        return productRepository.findById(id);
+    }
+
+    public void modify(Product product, String name, int price, int quantity) {
+        product.update(name, price, quantity);
+    }
+
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 }

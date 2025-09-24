@@ -24,4 +24,10 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public void update(String name, int price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
