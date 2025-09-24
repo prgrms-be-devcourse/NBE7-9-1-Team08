@@ -44,4 +44,8 @@ public class ApiResponse<T> {
     public enum Status {
         SUCCESS, FAILED
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2c12e91 (에러처리 코드 추가)
