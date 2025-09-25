@@ -1,6 +1,7 @@
 package org.example.cafe.domain.product.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.cafe.domain.product.dto.ProductDeleteDto;
 import org.example.cafe.domain.product.dto.ProductDto;
 import org.example.cafe.domain.product.entity.Product;
 import org.example.cafe.domain.product.service.ProductService;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
 
-    //상품 목록 조회
+    //상품 목록 조회 -> DB확인까지완료
     @GetMapping("/api/products")
     @Transactional(readOnly = true)
     public List<ProductDto> getProducts(){
@@ -26,7 +27,6 @@ public class ProductController {
         return productList;
     }
 
-
     //상품 등록 -> DB확인까지완료
     @PostMapping("/api/products")
     @Transactional
@@ -37,10 +37,6 @@ public class ProductController {
 
         return new ProductDto(product);
     }
-
-
-
-    //pull request
 
     //상품 수정 -> DB확인까지완료
     @PutMapping("/api/products")
@@ -55,13 +51,13 @@ public class ProductController {
     }
 
 
-    //상품 삭제
+    //상품 삭제 -> DB확인까지완료
     @DeleteMapping("/api/products")
     @Transactional
     public void deleteProduct(
-            @RequestBody Long id
-    ){
-        Product product = productService.findById(id).get();
+            @RequestBody ProductDeleteDto productDeleteDto
+            ){
+        Product product = productService.findById(productDeleteDto.getId()).get();
         productService.delete(product);
     }
 
