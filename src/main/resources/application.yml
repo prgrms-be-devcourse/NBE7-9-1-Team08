@@ -21,6 +21,7 @@ spring:
     ansi:
       enabled: always                           # 컬러 로그 (선택사항이나, 보기 좋음)
 
+
 # 공통 로깅 설정 (팀원 2의 상세 로깅 방식을 채택)
 logging:
   level:
