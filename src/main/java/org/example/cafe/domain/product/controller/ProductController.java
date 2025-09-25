@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
 
     //상품 목록 조회
     @GetMapping("/api/products")
@@ -26,17 +26,21 @@ public class ProductController {
         return productList;
     }
 
-    //상품 등록
+
+    //상품 등록 -> DB확인까지완료
     @PostMapping("/api/products")
     @Transactional
     public ProductDto createProduct(
-            @RequestBody String name,
-            @RequestBody int price,
-            @RequestBody int quantity
+            @RequestBody ProductDto productDto
     ){
-        Product product = productService.create("name", price, quantity);
+        System.out.println(productDto.getName()+" "+productDto.getPrice()+" "+productDto.getQuantity());
+        Product product = productService.create(productDto.getName(),productDto.getPrice(),productDto.getQuantity());
+
+        System.out.println(product.getName()+" "+product.getPrice()+" "+product.getQuantity());
         return new ProductDto(product);
     }
+
+
 
     //pull request
 
@@ -44,11 +48,9 @@ public class ProductController {
     @PutMapping("/api/products")
     @Transactional
     public void updateProduct(
-            @RequestBody int id,
-            @RequestBody String name,
-            @RequestBody int price,
-            @RequestBody int quantity
+            @RequestBody ProductDto productDto
     ){
+
         Product product = productService.findById(id).get();
         productService.modify(product, name, price, quantity);
     }

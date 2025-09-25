@@ -1,5 +1,6 @@
 package org.example.cafe.domain.product.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,10 +12,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;         //상품번호
+    private Long id;         //상품번호
     private String name;    //상품명    notnull
     private int price;      //상풍가격  notnull
     private int quantity;   //상품수량  notnull
