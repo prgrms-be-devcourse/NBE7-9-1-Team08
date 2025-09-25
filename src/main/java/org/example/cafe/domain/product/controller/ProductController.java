@@ -33,10 +33,8 @@ public class ProductController {
     public ProductDto createProduct(
             @RequestBody ProductDto productDto
     ){
-        System.out.println(productDto.getName()+" "+productDto.getPrice()+" "+productDto.getQuantity());
         Product product = productService.create(productDto.getName(),productDto.getPrice(),productDto.getQuantity());
 
-        System.out.println(product.getName()+" "+product.getPrice()+" "+product.getQuantity());
         return new ProductDto(product);
     }
 
@@ -44,15 +42,16 @@ public class ProductController {
 
     //pull request
 
-    //상품 수정
+    //상품 수정 -> DB확인까지완료
     @PutMapping("/api/products")
     @Transactional
-    public void updateProduct(
+    public ProductDto updateProduct(
             @RequestBody ProductDto productDto
     ){
+        Product product = productService.findById(productDto.getId()).get();
+        productService.modify(product, productDto.getName(), productDto.getPrice(), productDto.getQuantity());
 
-        Product product = productService.findById(id).get();
-        productService.modify(product, name, price, quantity);
+        return new ProductDto(product);
     }
 
 
@@ -60,7 +59,7 @@ public class ProductController {
     @DeleteMapping("/api/products")
     @Transactional
     public void deleteProduct(
-            @RequestBody int id
+            @RequestBody Long id
     ){
         Product product = productService.findById(id).get();
         productService.delete(product);
