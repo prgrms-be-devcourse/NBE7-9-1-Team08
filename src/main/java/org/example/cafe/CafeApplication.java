@@ -12,5 +12,4 @@ public class CafeApplication {
         System.out.println(System.getProperty("user.home"));
         SpringApplication.run(CafeApplication.class, args);
     }
-
 }
